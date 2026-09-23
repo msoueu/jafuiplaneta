@@ -1,12 +1,13 @@
 # jafuiplaneta 🍃
 
-Um perfil de cinéfilo pessoal, no estilo Letterboxd — feito pra dar de presente. Foto de
+Um perfil/diário pessoal pertencente a um ex cinéfilo chato vulgo dito cujo joao/acqua/tato. Esse site contem
 perfil, fundo personalizado, status, filmes favoritos, filmes que não curtiu, comentários
 e um diário completo de filmes/séries assistidos (com avaliação em folhas, no lugar de
 estrelas).
 
-Tudo é salvo no navegador (localStorage) — não precisa de internet nem de servidor depois
-de instalado, e os dados ficam só naquele computador/navegador.
+Caso queira visualizar o site/utilizar, acesse o vercel link direto: https://jafuiplaneta.vercel.app .
+
+Caso queira utilizar do seu pc pessoal, segue o passo a passo: 
 
 ## Como rodar
 
@@ -64,7 +65,8 @@ src/
   hooks/useLocalStorage.js   salva tudo no navegador
 ```
 
-## Se quiser publicar online depois
+## CUIDADO:
 
-Hoje o site roda só local. Se um dia quiser colocar num link (Vercel, Netlify etc.), é só
-pedir — dá pra publicar o mesmo projeto sem grandes mudanças.
+O ministério da saúde adverte, ao utilizar esse site tem os mesmos efeitos ou pior que fumar 5 maços de cigarro por dia, chegando próximo ao ar respirado pelos habitantes de Sao Paulo.
+
+.
