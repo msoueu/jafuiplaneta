@@ -64,6 +64,36 @@ src/
   hooks/useLocalStorage.js   salva tudo no navegador
 ```
 
+## Backend (dados salvos na nuvem, com Supabase)
+
+O site funciona sozinho, salvando tudo no navegador. Mas ele também sabe se sincronizar
+com um banco de dados gratuito (Supabase), pra os dados não dependerem só daquele
+navegador. É opcional: sem configurar nada, continua funcionando 100% local.
+
+1. Crie uma conta grátis em [supabase.com](https://supabase.com) e clique em
+   **New Project**. Escolha um nome e uma senha para o banco (guarde essa senha) e
+   espere uns 2 minutos até o projeto ficar pronto.
+2. No menu lateral, vá em **SQL Editor** → **New query**, cole o conteúdo do arquivo
+   `supabase/schema.sql` (que já vem nesta pasta) e clique em **Run**. Isso cria a
+   tabela que guarda os dados do app.
+3. Vá em **Settings** → **API**. Copie o **Project URL** e a chave **anon public**.
+4. Nesta pasta do projeto, copie o arquivo `.env.example` e renomeie a cópia para
+   `.env`. Abra ele e preencha:
+   ```
+   VITE_SUPABASE_URL=cole-a-url-aqui
+   VITE_SUPABASE_ANON_KEY=cole-a-chave-aqui
+   ```
+5. Rode `npm run dev` de novo. Um selo "salvando…" / "salvo na nuvem" aparece no topo
+   do site quando a sincronização está ativa.
+
+**Para funcionar também no site publicado (Vercel):** no painel do projeto na Vercel,
+vá em **Settings → Environment Variables** e adicione as duas mesmas variáveis
+(`VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`) com os mesmos valores do seu `.env`.
+Depois, em **Deployments**, clique nos "..." do último deploy e escolha **Redeploy**.
+
+O arquivo `.env` nunca é enviado ao GitHub (ele já está no `.gitignore`) — as chaves só
+existem no seu computador e na configuração da Vercel.
+
 ## Se quiser publicar online depois
 
 Hoje o site roda só local. Se um dia quiser colocar num link (Vercel, Netlify etc.), é só

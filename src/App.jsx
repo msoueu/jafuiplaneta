@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useLocalStorage } from './hooks/useLocalStorage.js'
+import { useCloudState } from './hooks/useCloudState.js'
 import { seedMovies, emptyProfile } from './data/seedMovies.js'
 import Navbar from './components/Navbar.jsx'
 import ProfileHeader from './components/ProfileHeader.jsx'
@@ -9,10 +9,37 @@ import NavTabs from './components/NavTabs.jsx'
 import MovieGrid from './components/MovieGrid.jsx'
 import MovieFormModal from './components/MovieFormModal.jsx'
 
+const initialAppState = {
+  movies: seedMovies,
+  profile: emptyProfile,
+  friendName: 'você',
+}
+
 export default function App() {
-  const [movies, setMovies] = useLocalStorage('jafuiplaneta-movies', seedMovies)
-  const [friendName, setFriendName] = useLocalStorage('jafuiplaneta-friend-name', 'você')
-  const [profile, setProfile] = useLocalStorage('jafuiplaneta-profile', emptyProfile)
+  const [appState, setAppState, syncStatus] = useCloudState('main', initialAppState)
+  const { movies, profile, friendName } = appState
+
+  function setMovies(updater) {
+    setAppState((prev) => ({
+      ...prev,
+      movies: typeof updater === 'function' ? updater(prev.movies) : updater,
+    }))
+  }
+
+  function setProfile(updater) {
+    setAppState((prev) => ({
+      ...prev,
+      profile: typeof updater === 'function' ? updater(prev.profile) : updater,
+    }))
+  }
+
+  function setFriendName(updater) {
+    setAppState((prev) => ({
+      ...prev,
+      friendName: typeof updater === 'function' ? updater(prev.friendName) : updater,
+    }))
+  }
+
   const [activeTab, setActiveTab] = useState('diario')
   const [query, setQuery] = useState('')
   const [showForm, setShowForm] = useState(false)
@@ -80,7 +107,13 @@ export default function App() {
       <div className="ambient-overlay" />
 
       <div className="app-shell">
-        <Navbar onAdd={openAdd} query={query} setQuery={setQuery} setProfile={setProfile} />
+        <Navbar
+          onAdd={openAdd}
+          query={query}
+          setQuery={setQuery}
+          setProfile={setProfile}
+          syncStatus={syncStatus}
+        />
 
         <ProfileHeader
           profile={profile}

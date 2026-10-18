@@ -158,6 +158,31 @@ a {
   flex-shrink: 0;
 }
 
+.sync-pill {
+  font-size: 0.68rem;
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  color: var(--color-stone);
+  border: 1px solid var(--color-bark-light);
+  white-space: nowrap;
+}
+
+.sync-synced {
+  color: var(--color-moss-bright);
+  border-color: var(--color-moss);
+}
+
+.sync-syncing {
+  color: var(--color-amber);
+  border-color: var(--color-amber);
+}
+
+.sync-offline,
+.sync-error {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
 .search-input {
   background: var(--color-bg-card);
   border: 1px solid var(--color-bark-light);

@@ -1,7 +1,14 @@
 import { useRef } from 'react'
 import { compressImage } from '../utils.js'
 
-export default function Navbar({ onAdd, query, setQuery, setProfile }) {
+const STATUS_LABEL = {
+  syncing: 'salvando…',
+  synced: 'salvo na nuvem',
+  offline: 'sem conexão',
+  error: 'erro ao salvar',
+}
+
+export default function Navbar({ onAdd, query, setQuery, setProfile, syncStatus }) {
   const bgInputRef = useRef(null)
 
   async function handleBgPick(e) {
@@ -37,6 +44,9 @@ export default function Navbar({ onAdd, query, setQuery, setProfile }) {
       />
 
       <div className="navbar-actions">
+        {syncStatus && syncStatus !== 'local' && (
+          <span className={`sync-pill sync-${syncStatus}`}>{STATUS_LABEL[syncStatus]}</span>
+        )}
         <button type="button" className="btn btn-ghost" onClick={() => bgInputRef.current?.click()}>
           trocar fundo
         </button>
