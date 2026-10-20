@@ -8,7 +8,7 @@ const STATUS_LABEL = {
   error: 'erro ao salvar',
 }
 
-export default function Navbar({ onAdd, query, setQuery, setProfile, syncStatus }) {
+export default function Navbar({ onAdd, query, setQuery, setProfile, syncStatus, onLogout }) {
   const bgInputRef = useRef(null)
 
   async function handleBgPick(e) {
@@ -54,6 +54,11 @@ export default function Navbar({ onAdd, query, setQuery, setProfile, syncStatus 
         <button className="btn btn-primary" onClick={onAdd}>
           + adicionar
         </button>
+        {onLogout && (
+          <button type="button" className="btn btn-ghost" onClick={onLogout}>
+            sair
+          </button>
+        )}
       </div>
     </header>
   )

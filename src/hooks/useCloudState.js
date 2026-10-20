@@ -23,6 +23,8 @@ export function useCloudState(id, initialValue) {
   const [status, setStatus] = useState(isSupabaseConfigured ? 'syncing' : 'local')
   const hasLoadedCloud = useRef(!isSupabaseConfigured)
   const saveTimer = useRef(null)
+  const stateRef = useRef(state)
+  stateRef.current = state
 
   // Busca a versão salva na nuvem uma vez, ao abrir o site.
   useEffect(() => {
@@ -47,6 +49,13 @@ export function useCloudState(id, initialValue) {
 
       if (data?.data) {
         setState(data.data)
+      } else {
+        // Primeira vez: ainda não existe registro na nuvem, então cria um
+        // com o que já está na tela.
+        const { error: createError } = await supabase
+          .from(TABLE)
+          .upsert({ id, data: stateRef.current, updated_at: new Date().toISOString() })
+        if (createError) console.error('Erro ao criar registro na nuvem', createError)
       }
       hasLoadedCloud.current = true
       setStatus('synced')
