@@ -39,7 +39,7 @@ export default function LoginScreen() {
             <i className="dot dot-blue" />
           </span>
           <h1 className="login-title">jafuiplaneta</h1>
-          <p className="login-sub">entre para abrir o diário</p>
+          <p className="login-sub">Um local tranquilo para poder ser um cinéfilo chato hipotético sem julgamentos</p>
 
           <label className="field">
             <span>Usuário</span>
